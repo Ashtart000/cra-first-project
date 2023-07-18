@@ -5,11 +5,20 @@ class Greeting extends React.Component {
         super(props);
 
         this.state = {
-
+            isGreeting: true
         }
     }
+
+    clickHandler() {
+        this.setState({
+            isGreeting: !this.state.isGreeting
+        })
+    }
+
     render() {
-        return <h1>Hello {this.props.name}</h1>;
+        //const {isGreering} = this.state;
+        const greetingText = this.state.isGreeting ? 'Hello' : 'Bye';
+        return <h1 onClick={() => {this.clickHandler()}}>{greetingText} {this.props.name}</h1>;
     }
 }
 
