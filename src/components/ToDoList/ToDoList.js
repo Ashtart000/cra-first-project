@@ -22,8 +22,18 @@ class ToDoList extends React.Component {
     }
 
     createList() {
-        const {listArray} = this.state;
-        return listArray.map((list) => <li key={list.id}>{list.text}</li>)
+        const { listArray } = this.state;
+        return listArray.map((list) => <li key={list.id}>
+            {list.text}
+            <button onClick={() => {this.removeTask(list.id)}}>X</button></li>)
+    }
+
+    removeTask(listIdToRemove) {
+        const { listArray } = this.state;
+        const filteredArray = listArray.filter((list) => list.id !== listIdToRemove);
+        this.setState({
+            listArray: filteredArray
+        })
     }
 
     render() {
