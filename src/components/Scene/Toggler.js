@@ -12,11 +12,12 @@ class Toggler extends React.Component {
     toggler() {
         this.setState({
           isOn: !this.state.isOn
-        })
+        });
+        this.props.changeParentState()
     }
 
     render() {
-        const buttonText = this.state.isOn ? 'On' : 'Off';
+        const buttonText = this.state.isOn ? 'Off' : 'On';
         return (
             <button onClick={() => {this.toggler()}}>{buttonText}</button>
         )
