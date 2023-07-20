@@ -1,4 +1,5 @@
 import React from "react";
+import ToDoItem from "./ToDoItem";
 
 class ToDoList extends React.Component {
     constructor(props) {
@@ -23,9 +24,7 @@ class ToDoList extends React.Component {
 
     createList() {
         const { listArray } = this.state;
-        return listArray.map((list) => <li key={list.id}>
-            {list.text}
-            <button onClick={() => {this.removeTask(list.id)}}>X</button></li>)
+        return listArray.map((list) => <ToDoItem key={list.id} text={list.text} id={list.id} delCallback={(id) => {this.removeTask(id)}}/>)
     }
 
     removeTask(listIdToRemove) {
