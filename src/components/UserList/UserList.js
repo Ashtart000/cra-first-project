@@ -22,12 +22,13 @@ class UserList extends React.Component {
 
     render() {
         const {users} = this.state;
-        
+
         return(
             <>
                 <h1>User List</h1>
 
-                {users.length > 0 ? <UserCard user={users[0]} /> : null}
+                {/* {users.length > 0 ? <UserCard user={users[0]} /> : null} */}
+                {users.map((oneUser) => <UserCard key={oneUser.email} user={oneUser} />)}
             </>
         )
     }
