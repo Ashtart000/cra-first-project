@@ -4,11 +4,12 @@ import './index.css';
 //import AlohaDashboard from './components/AlohaDashboard/AlohaDashboard';
 //import ToDoList from './components/ToDoList/ToDoList';
 //import Scene from './components/Scene/Scene';
-import CounterPage from './components/Counter/CounterPage';
+//import CounterPage from './components/Counter/CounterPage';
+import UserList from './components/UserList/UserList';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <CounterPage />
+  <UserList />
 );
 
 
