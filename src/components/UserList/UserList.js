@@ -20,15 +20,19 @@ class UserList extends React.Component {
         });
     }
 
-    render() {
-        const {users} = this.state;
+    renderUsers = () => {
+        const { users } = this.state;
+        return users.map((user) => <UserCard user={user} key={user.login.uuid} />)
+    }
 
-        return(
+    render() {
+        const { users } = this.state;
+        return (
             <>
                 <h1>User List</h1>
-
-                {/* {users.length > 0 ? <UserCard user={users[0]} /> : null} */}
-                {users.map((oneUser) => <UserCard key={oneUser.email} user={oneUser} />)}
+                <section className="card-container">
+                    {users.length > 0 ? this.renderUsers() : null}
+                </section>
             </>
         )
     }
