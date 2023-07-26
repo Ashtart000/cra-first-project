@@ -8,13 +8,27 @@ class SingInForm extends React.Component {
 
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            isEmailValid: true
         }
     }
 
     submitHandler = (event) => {
         event.preventDefault();
         // тут можуть бути валідації перед запитом на сервер
+        const {email} = this.state;
+
+        if(!email.includes('@')) { // === false
+            this.setState({
+                isEmailValid: false
+            })
+        } 
+        if(email.includes('@')) { // === true
+            this.setState({
+                isEmailValid: true
+            })
+        } 
+
         console.log(this.state); //тут може бути запит на сервер
     }
 
@@ -25,20 +39,6 @@ class SingInForm extends React.Component {
         })
     }
 
-   /* changeEmailHandler = (event) => {
-        // тут можуть бути якісь валідації для динамічної перевірки даних від користувача
-        this.setState({
-            email: event.target.value
-        })
-    }
-
-    changePasswordHandler = (event) => {
-        this.setState({
-            password: event.target.value
-        })
-    }
-    */
-
     universalChangeHandler = ({target: {value, name}}) => {
         this.setState({
             [name]: value
@@ -46,13 +46,13 @@ class SingInForm extends React.Component {
     }
 
     render() {
-        const {email, password} = this.state;
+        const {email, password, isEmailValid} = this.state;
 
         return (
         <form className='form-wrapper' onSubmit={this.submitHandler} onReset={this.resetHandler}>
             <label>
                 Your email:
-                <input type='email' name='email' onChange={this.universalChangeHandler} value={email}/>
+                <input className={isEmailValid ? '' : 'invalid'} type='text' name='email' onChange={this.universalChangeHandler} value={email}/>
             </label>
             <label>
                 Password:
