@@ -1,12 +1,10 @@
 import React from "react";
-import SingInForm from "./SingInForm/SingInForm";
-import SignUpForm from "./SignUpForm/SignUpForm";
+import UserList from "./UserList/UserList";
 
 function App() {
 
-    return(
-        // <SingInForm />
-        <SignUpForm />
+    return(        
+        <UserList />
     )
 }
 

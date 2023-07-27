@@ -23,3 +23,7 @@
     height: 150px;
     border-radius: 50%;
 }
+
+input {
+    margin-left: 5px;
+}
