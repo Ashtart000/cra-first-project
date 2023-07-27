@@ -1,6 +1,8 @@
 import React from "react";
 import ToDoItem from "./ToDoItem";
-import ToDoForm from "./ToDoForm";
+import ToDoForm from "./ToDoForm/ToDoForm";
+//import './style.css'
+import styles from './ToDoListStyle.module.css'
 
 class ToDoList extends React.Component {
     constructor(props) {
@@ -56,7 +58,7 @@ class ToDoList extends React.Component {
             <>
                 <h1>To Do List</h1>
                 <ToDoForm sendData={this.formHandler}/>
-                <ul>
+                <ul className={styles.container}>
                     {this.createList()}
                 </ul>
             </>
