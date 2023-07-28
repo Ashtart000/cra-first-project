@@ -1,3 +1,9 @@
+$main-color: teal;
+
+* {
+    color: $main-color;
+}
+
 %flex-column {
     display: flex;
     flex-direction: column;

@@ -1,3 +1,13 @@
+// @mixin user-img($w, $h) {
+//     width: $w;
+//     height: $h;
+// }
+
+@mixin userImg {
+    width: 100px;
+    height: 100px;
+}
+
 .card-container {
     width: 100%;
     display: flex;
@@ -19,8 +29,8 @@
 }
 
 .user-img {
-    width: 150px;
-    height: 150px;
+    // @include user-img(100px, 100px);
+    @include userImg;
     border-radius: 50%;
 }
 

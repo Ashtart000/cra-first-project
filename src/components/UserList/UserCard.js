@@ -1,4 +1,4 @@
-import './style.css';
+import './style.scss';
 
 function UserCard(props) {
     const {user: {name: {first: firstName, last: lastName}, email, picture: {large: imgSrc}}} = props;
