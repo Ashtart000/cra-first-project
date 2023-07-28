@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import styles from '../ToDoListStyle.module.css'
+import styles from '../ToDoListStyle.module.css';
+import cx from 'classnames'
 
 class ToDoForm extends Component {
     constructor(props) {
@@ -57,12 +58,12 @@ class ToDoForm extends Component {
     }
 }
 
-function cx(objectClassNames) {
-    const cort = Object.entries(objectClassNames);
-    const filteredArray = cort.filter(([className, condition]) => condition);
-    const MapArray = filteredArray.map(([className, condition]) => className);
-    return MapArray.join(' ');
-}
+// function cx(objectClassNames) {
+//     const cort = Object.entries(objectClassNames);
+//     const filteredArray = cort.filter(([className, condition]) => condition);
+//     const MapArray = filteredArray.map(([className, condition]) => className);
+//     return MapArray.join(' ');
+// }
 // 'className1 className2'
 
 /*
