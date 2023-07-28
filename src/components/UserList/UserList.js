@@ -1,6 +1,7 @@
 import React from "react";
 import { getUsers } from "../../api"; 
 import UserCard from "./UserCard";
+import styles from './UserListStyle.module.scss'
 
 class UserList extends React.Component {
     constructor(props) {
@@ -42,6 +43,23 @@ class UserList extends React.Component {
         }
     };
 
+    handleEmailSearch = ({ target: { value } }) => {
+        if (value === '') {
+            this.setState({
+                filteredUsers: []
+            });
+        } else {
+            const { users } = this.state;
+            const searchValue = value;
+            const filteredUsers = users.filter((user) =>
+                user.email.toLowerCase().trim().indexOf(searchValue.toLowerCase().trim()) !== -1
+            );
+            this.setState({
+                filteredUsers
+            });
+        }
+    };
+
     setUserCount = ({target: {value}}) => {
         this.setState({
             userCount: value
@@ -62,15 +80,21 @@ class UserList extends React.Component {
         return (
             <>
                 <h1>User List</h1>
-                <label>
+                <div className={styles['input-container']}>
+                    <label>
                     Type count users
                     <input type="number" min={1} max={100} onChange={this.setUserCount}/>
                 </label>
-                <button onClick={this.loadUsers}>Load users</button>
+                <button onClick={this.loadUsers}>Load users</button>               
                 <label>
                     Search by last name
                     <input type="text" onChange={this.handleSearch} />
                 </label>
+                <label>
+                    Search by email
+                    <input type="text" onChange={this.handleEmailSearch} />
+                </label>
+                </div>
                 <section className="card-container">
                     {users.length > 0 ? this.renderUsers() : <h2>Users is Loading!..</h2>}
                 </section>

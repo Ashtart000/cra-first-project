@@ -1,0 +1,26 @@
+%flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: stretch;
+    gap: 10px;
+    width: 400px;
+}
+
+.input-container {
+    @extend %flex-column;
+
+    button {
+        width: 100px;
+        padding: 3px;
+    }
+
+    input {
+        padding: 3px;
+
+        &:hover {
+            background-color: beige;
+        }
+    }
+}
+

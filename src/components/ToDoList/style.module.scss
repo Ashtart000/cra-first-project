@@ -1,0 +1,66 @@
+$main-color: green;
+$sm-size: 550px;
+$xl: 1200px;
+$xxl: 1400px;
+
+@mixin flex($fd, $jc, $ai) {
+    display: flex;
+    flex-direction: $fd;
+    justify-content: $jc;
+    align-items: $ai;
+}
+
+.form {
+    @include flex(column, center, stretch);
+}
+
+.button {
+    @include flex(row, flex-start, center);
+}
+
+%flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: space-between;
+
+    &:hover {
+        background-color: beige;
+    }
+}
+
+.container {
+    @extend %flex-column;
+    background-color: $main-color;
+    height: 300px;
+    width: 300px;
+
+    img {
+        width: 200px;
+        height: 200px;
+    }
+
+    &:hover {
+        background-color: aqua;
+    }
+
+    @media screen and (max-width: $xl) {
+        & {
+            color: grey;
+        }
+    }
+}
+
+.text {
+    color: $main-color;
+}
+
+.wrapper {
+    @extend %flex-column;
+}
+
+@media screen and (max-width: $sm-size) {
+    h1 {
+        color: red;
+    }
+}
