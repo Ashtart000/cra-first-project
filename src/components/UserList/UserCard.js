@@ -1,7 +1,10 @@
 import './style.scss';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-function UserCard(props) {
-    const {user: {name: {first: firstName, last: lastName}, email, picture: {large: imgSrc}}} = props;
+class UserCard extends React.Component {
+    render() {
+        const {user: {name: {first: firstName, last: lastName}, email, picture: {large: imgSrc}}} = this.props;
 
     return (
         <article className='card-wrapper'>
@@ -10,6 +13,31 @@ function UserCard(props) {
             <p>{email}</p>
         </article>
     )
+    }    
 }
+
+// UserCard.propTypes = {
+//     user: PropTypes.object.isRequired
+// }
+
+UserCard.propTypes = {
+    user: PropTypes.shape(
+        {
+            name: PropTypes.shape(
+                {
+                    first: PropTypes.string.isRequired,
+                    last: PropTypes.string.isRequired
+                }
+            ).isRequired,
+            email: PropTypes.string.isRequired,
+            picture: PropTypes.shape(
+                {
+                    large: PropTypes.string
+                }
+            )
+        }
+    ).isRequired
+ }
+
 
 export default UserCard;
