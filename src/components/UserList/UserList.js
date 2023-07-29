@@ -13,17 +13,26 @@ class UserList extends React.Component {
             filteredUsers: [],
             userCount: 100,
             isLoading: true,
-            error: null
+            error: null,
+            page: 1
         }
     }
 
     componentDidMount() {
-        this.loadUsers();
+        const {userCount, page} = this.state;
+        this.loadUsers(userCount, page);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        const {userCount, page} = this.state;
+        if(prevState.page !== page) {
+            this.loadUsers(userCount, page);
+        }
     }
 
     renderUsers = () => {
         const { users, filteredUsers } = this.state;
-        // После фильтра ломается новая загрузка юзеров
+        
         return filteredUsers.length > 0
         ? filteredUsers.map((user) => <UserCard user={user} key={user.login.uuid} />)
         : users.map((user) => <UserCard user={user} key={user.login.uuid} />)
@@ -69,12 +78,11 @@ class UserList extends React.Component {
         })
     }
 
-    loadUsers = () => {
-        getUsers(this.state.userCount).then((data) => {
+    loadUsers = (userCount, page) => {
+        getUsers(userCount, page).then((data) => {
             const {results} = data;
             this.setState({
-                users: results
-                
+                users: results   
             })
         })
         .catch((error) => {
@@ -88,6 +96,21 @@ class UserList extends React.Component {
             })
         })
     }
+
+    prevBtnHandler = () => {
+        if(this.state.page > 1) {
+            this.setState({
+            page: this.state.page -1
+            })
+        }    
+    }
+
+    nextBtnHandler = () => {
+        this.setState({
+            page: this.state.page +1
+        })
+    }
+
 
     render() {
         const { users, isLoading, error } = this.state;
@@ -109,6 +132,8 @@ class UserList extends React.Component {
                     <input type="text" onChange={this.handleEmailSearch} />
                 </label>
                 </div>
+                <button onClick={this.prevBtnHandler}>Previous Page</button>
+                <button onClick={this.nextBtnHandler}>Next Page</button>
                 <section className="card-container">
                     {isLoading && <PacmanLoader
                         size={100}
