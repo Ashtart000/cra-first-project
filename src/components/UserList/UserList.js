@@ -1,7 +1,8 @@
 import React from "react";
 import { getUsers } from "../../api"; 
 import UserCard from "./UserCard";
-import styles from './UserListStyle.module.scss'
+import styles from './UserListStyle.module.scss';
+import PacmanLoader from "react-spinners/PacmanLoader";
 
 class UserList extends React.Component {
     constructor(props) {
@@ -10,7 +11,9 @@ class UserList extends React.Component {
         this.state = {
             users: [],
             filteredUsers: [],
-            userCount: 100
+            userCount: 100,
+            isLoading: true,
+            error: null
         }
     }
 
@@ -71,12 +74,23 @@ class UserList extends React.Component {
             const {results} = data;
             this.setState({
                 users: results
+                
             })
-        });
+        })
+        .catch((error) => {
+            this.setState({
+                error
+            })
+        })
+        .finally(() => {
+            this.setState({
+                isLoading: false
+            })
+        })
     }
 
     render() {
-        const { users } = this.state;
+        const { users, isLoading, error } = this.state;
         return (
             <>
                 <h1>User List</h1>
@@ -96,7 +110,15 @@ class UserList extends React.Component {
                 </label>
                 </div>
                 <section className="card-container">
-                    {users.length > 0 ? this.renderUsers() : <h2>Users is Loading!..</h2>}
+                    {isLoading && <PacmanLoader
+                        size={100}
+                        color="#36d7b7"
+                        cssOverride={{
+                            margin: '20px 20px'
+                        }}
+                    />}
+                    {error && <h2 style={{backgroundColor: 'red', color: 'white'}}>{error.message}</h2>}
+                    {users.length > 0 ? this.renderUsers() : null}
                 </section>
             </>
         )
