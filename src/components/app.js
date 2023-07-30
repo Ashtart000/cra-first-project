@@ -1,35 +1,30 @@
 import React from "react";
-//import TVLoader from "./TVLoader/TVLoader";
-//import PhonesLoader from "./PhonesLoader/PhonesLoader";
-import DataProvider from "./DataProvider/DataProvider";
+import Tree from "./Tree/Tree";
+import { UserContext } from "../contexts/userContext";
 
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            user: {
+                firstName: 'John',
+                lastName: 'Doe',
+                email: 'johndoe@gmail.com',
+                avatar: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
+            }
+        }
+    }
+    
 
-function App() {
-
-    return(
-        <>
-            <DataProvider>
-            {() => {
-                return fetch('./tv.json')
-                .then((response) => response.json())
-            }} 
-            {(state) => {
-                const {data, isLoading, error} = state;
-                return (
-                    <>
-                    {isLoading && <div>Loading...</div>}
-                    {error && <div>{error.message}</div>}
-                    <ol>
-                        {data.map((data) => 
-                            <li key={`${Date.now()} ${data.brand} ${data.model}`}>{data.brand} - {data.model} - {data.price}</li>
-                        )}
-                    </ol>
-                    </>
-                );
-            }}
-            </DataProvider>    
-        </>
-    )
+    render() {
+        return(
+            // <Tree user={this.state.user}/>
+            <UserContext.Provider value={this.state.user}>
+                <Tree />
+            </UserContext.Provider>
+        )
+    }
 }
 
 export default App;
