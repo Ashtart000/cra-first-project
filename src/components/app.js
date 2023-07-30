@@ -15,12 +15,20 @@ class App extends React.Component {
             }
         }
     }
-    
+
+    logOut = () => {
+        this.setState({
+            user: []
+        })
+    }    
 
     render() {
         return(
             // <Tree user={this.state.user}/>
-            <UserContext.Provider value={this.state.user}>
+            <UserContext.Provider value={{
+                user: this.state.user,
+                logOut: this.logOut
+            }}>
                 <Tree />
             </UserContext.Provider>
         )
