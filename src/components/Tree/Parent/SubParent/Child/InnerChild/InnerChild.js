@@ -8,7 +8,7 @@ const InnerChild = (props) => {
             {({user, logOut}) => {
                 const {firstName, lastName, avatar} = user;
                     return (
-                        <div style={{border: '2px solid black', padding: '25px'}}>
+                        <div>
                             InnerChild
                             <p>{firstName} {lastName}</p>
                             <img style={{width: '200px', borderRadius: '50%'}} src={avatar} alt={`${firstName} ${lastName}`}/>
