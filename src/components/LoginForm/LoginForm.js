@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
 import style from './LoginForm.module.scss';
-import * as yup from 'yup';
-
-const SCHEMA = yup.object ({
-    firstName: yup.string().min(2).max(30).required(),
-    lastName: yup.string().min(2).max(30),
-    email: yup.string().required().email(),
-    password: yup.string().required().matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/)
-});
+import { SCHEMA } from '../../schemas';
 
 const initialState = {
     firstName: '',
@@ -21,7 +14,8 @@ class LoginForm extends Component {
         super(props);
         
         this.state = {
-            ...initialState
+            ...initialState,
+            error: null
         }
     }
 
@@ -33,11 +27,20 @@ class LoginForm extends Component {
     
     submitHandler = (event) => {
         event.preventDefault();
-        console.log(SCHEMA.isValidSync(this.state))
+        try {
+            this.setState({
+                error: null
+            });
+            SCHEMA.validateSync(this.state)
+        } catch (error) {
+            this.setState({
+                error
+            })
+        }
     }
 
     render() {
-        const {firstName, lastName, email, password} = this.state;
+        const {firstName, lastName, email, password, error} = this.state;
 
         return (
             <form onSubmit={this.submitHandler}>
@@ -57,7 +60,8 @@ class LoginForm extends Component {
                     Password:
                     <input type="text" value={password} name='password' onChange={this.changeHandler}/>
                 </label>
-                <button type='submit'>Submit</button>    
+                <button type='submit'>Submit</button> 
+                {error && <p className={style.error}>{error.message}</p>}  
             </form>
         );
     }
