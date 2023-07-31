@@ -14,14 +14,36 @@ const Subparent = (props) => {
             <Child />
         </div>
     )
+    
+        
+        // <UserContext.Consumer>
+        //     {({user, logOut}) => {
+        //         return (
+        //             <ThemeContext.Consumer>
+        //                 {({theme, setTheme}) => {
+        //                     return (
+        //                         <SubparentWithTheme theme={theme} user={user} setTheme={setTheme}/>
+        //                     )    
+        //     }}
+        // </ThemeContext.Consumer>
+        //         )
+        //     }}
+        // </UserContext.Consumer>
+    
 }
 
-// const SubParentWithTheme = withTheme(Subparent);
-// const SubParentWithThemeWithUser = withUser(SubParentWithTheme);
+const SubparentWithTheme = (props) => {
+    return (
+        <UserContext.Consumer>
+            {({user, logOut}) => {
+                const SubparentWithTheme = withTheme(Subparent);
+                return (
+                    <SubparentWithTheme user={user} logOut={logOut} />
+                )
+            }}
+        </UserContext.Consumer>
+    )
+}
 
-// export default SubParentWithThemeWithUser;
-
-
-export default withUser(withTheme(Subparent));
-
+export default SubparentWithTheme;
 
