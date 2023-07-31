@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import style from './LoginForm.module.scss';
 import { SCHEMA } from '../../schemas';
+import { Formik, Form, Field } from 'formik';
 
 const initialState = {
     firstName: '',
@@ -9,62 +10,29 @@ const initialState = {
     password: ''
 };
 
-class LoginForm extends Component {
-    constructor(props) {
-        super(props);
+function LoginForm(props) {
+    const handleSubmitToFormik = (values, actions) => {
+        console.log(values);
+        actions.resetForm()
+    }
+
+    return (
+            <Formik initialValues={initialState} onSubmit={handleSubmitToFormik}>
+                {(formikProps) => {
+
+                    return (
+                        <Form>
+                            <Field placeholder='firstName' name='firstName'/>
+                            <Field placeholder='lastName' name='lastName'/>
+                            <Field placeholder='email' name='email'/>
+                            <Field type='password' placeholder='password' name='password'/>
+                            <button type='submit'>Send</button>
+                        </Form>
+                    )
+                }}
+            </Formik>
+    );
         
-        this.state = {
-            ...initialState,
-            error: null
-        }
-    }
-
-    changeHandler = ({target: {value, name}}) => {
-        this.setState({
-            [name]: value
-        })
-    }
-    
-    submitHandler = (event) => {
-        event.preventDefault();
-        try {
-            this.setState({
-                error: null
-            });
-            SCHEMA.validateSync(this.state)
-        } catch (error) {
-            this.setState({
-                error
-            })
-        }
-    }
-
-    render() {
-        const {firstName, lastName, email, password, error} = this.state;
-
-        return (
-            <form onSubmit={this.submitHandler}>
-                <label>
-                    First Name:
-                    <input type="text" value={firstName} name='firstName' onChange={this.changeHandler}/>
-                </label>
-                <label>
-                    Last Name:
-                    <input type="text" value={lastName} name='lastName' onChange={this.changeHandler}/>
-                </label>
-                <label>
-                    Email:
-                    <input type="text" value={email} name='email' onChange={this.changeHandler}/>
-                </label>
-                <label>
-                    Password:
-                    <input type="text" value={password} name='password' onChange={this.changeHandler}/>
-                </label>
-                <button type='submit'>Submit</button> 
-                {error && <p className={style.error}>{error.message}</p>}  
-            </form>
-        );
-    }
 }
 
 export default LoginForm;
