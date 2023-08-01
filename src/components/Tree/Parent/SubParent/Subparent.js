@@ -1,49 +1,26 @@
-import React from 'react';
+import React, { useContext} from 'react';
 import Child from './Child/Child';
-import { withTheme, withUser } from '../../../../HOC';
 import CONSTANTS from '../../../../constants';
+import { UserContext } from '../../../../contexts/userContext';
+import { ThemeContext } from '../../../../contexts/themeContext';
 const { THEMES } = CONSTANTS;
 
-const Subparent = (props) => {
-    const nextTheme = props.theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
+const Subparent = () => {
+    
+    const {user} = useContext(UserContext);
+    const {theme, setTheme} = useContext(ThemeContext);
+    const nextTheme = theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
+
     return (
         <div style={{border: '2px solid black'}}>
             SubParent
-            <p>{props.user.firstName} {props.user.lastName}</p>
-            <button onClick={() => {props.setTheme(nextTheme)}}>Click to change theme</button>
+            <p>{user.firstName} {user.lastName}</p>
+            <button onClick={() => {setTheme(nextTheme)}}>Click to change theme</button>
             <Child />
         </div>
-    )
-    
-        
-        // <UserContext.Consumer>
-        //     {({user, logOut}) => {
-        //         return (
-        //             <ThemeContext.Consumer>
-        //                 {({theme, setTheme}) => {
-        //                     return (
-        //                         <SubparentWithTheme theme={theme} user={user} setTheme={setTheme}/>
-        //                     )    
-        //     }}
-        // </ThemeContext.Consumer>
-        //         )
-        //     }}
-        // </UserContext.Consumer>
-    
+    )    
 }
 
-const SubparentWithTheme = (props) => {
-    return (
-        <UserContext.Consumer>
-            {({user, logOut}) => {
-                const SubparentWithTheme = withTheme(Subparent);
-                return (
-                    <SubparentWithTheme user={user} logOut={logOut} />
-                )
-            }}
-        </UserContext.Consumer>
-    )
-}
 
-export default SubparentWithTheme;
+export default Subparent;
 
