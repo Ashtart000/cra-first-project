@@ -1,10 +1,12 @@
-import React from 'react';
-import CounterPage from './Counter/CounterPage';
+import React from "react";
+import PhonesLoader from "./PhonesLoader/PhonesLoader";
 
-const App = () => {
+
+function App() {
     return (
-        <CounterPage />
-    );
+        <PhonesLoader />
+    )
+
 }
 
 export default App;
