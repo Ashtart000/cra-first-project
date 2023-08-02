@@ -1,5 +1,5 @@
 import React from 'react';
-import CounterFunction from './Counter'
+import CounterFunction from './CounterFunction'
 
 class CounterPage extends React.Component {
     constructor(props) {

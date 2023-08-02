@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 
 const CounterFunction = () => {
-    const {count, setCount} = useState(0);
-    const {intervalId, setIntervalId} = useState(null);
+    const [count, setCount] = useState(0);
  
     useEffect(() => {
         const intervalId = setInterval(() => {
-            setCount(count => +1);
+            setCount(count => count + 1);
         }, 1000)
 
         return () => {
