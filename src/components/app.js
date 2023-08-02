@@ -22,7 +22,7 @@ class App extends React.Component {
 
     logOut = () => {
         this.setState({
-            user: []
+            user: {}
         })
     } 
 
