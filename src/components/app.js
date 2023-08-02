@@ -1,12 +1,13 @@
 import React from "react";
-import PhonesLoader from "./PhonesLoader/PhonesLoader";
+import LoginForm from "./LoginForm/LoginForm";
 
 
-function App() {
-    return (
-        <PhonesLoader />
-    )
+class App extends React.Component {
 
+    render() {
+        return (
+            <LoginForm />
+        )
+    }
 }
-
 export default App;
