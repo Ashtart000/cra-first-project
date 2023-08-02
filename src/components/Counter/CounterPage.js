@@ -1,5 +1,5 @@
 import React from 'react';
-import Counter from './Counter'
+import CounterFunction from './Counter'
 
 class CounterPage extends React.Component {
     constructor(props) {
@@ -14,7 +14,7 @@ class CounterPage extends React.Component {
         return (
             <>
                 <button onClick={() => this.setState({isMount: !this.state.isMount})}>Unmount Counter</button>
-                {this.state.isMount ? <Counter /> : null}
+                {this.state.isMount ? <CounterFunction /> : null}
             </>
         )
     }
