@@ -1,13 +1,16 @@
 import React from "react";
-import LoginForm from "./LoginForm/LoginForm";
+import useMouseTracker from "./MouseTracker/MouseTracker";
 
 
-class App extends React.Component {
+function App() {
+    const {coordinates} = useMouseTracker();
 
-    render() {
-        return (
-            <LoginForm />
-        )
-    }
+    
+    return (
+        <section>
+            <p>X: {coordinates.x}</p>
+            <p>Y: {coordinates.y}</p>
+        </section>
+    )
 }
 export default App;
