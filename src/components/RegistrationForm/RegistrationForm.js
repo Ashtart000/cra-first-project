@@ -1,5 +1,9 @@
 import React, {useState, useReducer} from 'react';
-import styles from './Style.module.scss'
+import { reducer }  from '../../reducers/index';
+import CONSTANTS from '../../constants';
+import styles from './Style.module.scss';
+const {ACTIONS} = CONSTANTS
+
 
 const RegistrationForm = () => {
 
@@ -10,28 +14,11 @@ const RegistrationForm = () => {
         password: ''
     }
 
-    function reducer(state,action) {
-        switch(action.type) {
-            case 'INPUT_CHANGE': {
-                const {name, value} = action.payload
-                return {
-                    ...state,
-                    [name]: 
-                    value
-                }
-            }
-            default: {
-                return state
-            }
-
-        }
-    }
-
     const [state, dispatch] = useReducer(reducer, initialState);
 
     const inputChangeHandler = ({target: {value, name}}) => {
         dispatch({
-            type: 'INPUT_CHANGE',
+            type: ACTIONS.INPUT_CHANGE,
             payload: {
                 value,
                 name
